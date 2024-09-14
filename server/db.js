@@ -1,13 +1,13 @@
 const { Pool } = require("pg");
-
+console.log(process.env.DATABASE);
 const pool = new Pool({
-  user: "cook_it_up_user",
-  host: "dpg-criofhdumphs73cnqcug-a.oregon-postgres.render.com",
-  database: "cook_it_up",
-  password: "g0JXzzunH8K0ZOUQqtQMZfXIojhEUl4l",
+  user: process.env.USER,
+  host: process.env.HOST,
+  database: process.env.DATABASE,
+  password: process.env.PASSWORD,
   port: 5432,
   ssl: {
-    rejectUnauthorized: false, // This option is useful if you don’t have a valid SSL certificate, but for production, you should set this to `true` and provide proper certificates.
+    rejectUnauthorized: false,
   },
 });
 

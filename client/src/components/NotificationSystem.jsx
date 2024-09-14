@@ -19,12 +19,12 @@ const NotificationSystem = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get(
+        const res = await axios.post(
           `https://nebula9-ai-cook-it-up.onrender.com/notifications/${userName}`
         );
         console.log(res);
-        setNotifications(res.data);
-        setUnreadCount(res.data.filter((n) => !n.is_read).length);
+        setNotifications(res.data.data);
+        setUnreadCount(res.data.data.filter((n) => !n.is_read).length);
       } catch (error) {
         console.error("Error fetching notifications:", error);
       }
