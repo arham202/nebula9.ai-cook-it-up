@@ -1,13 +1,15 @@
 import "./SideBar.css";
 import Cookies from "js-cookie";
-import { MdMenu, MdOutlineQuestionMark } from "react-icons/md";
+import { MdMenu } from "react-icons/md";
 import {
   AiOutlinePlusCircle,
-  AiOutlineHistory,
   AiOutlineLogout,
   AiOutlineDelete,
 } from "react-icons/ai";
-import { FaRegMessage } from "react-icons/fa6";
+import { MdFastfood } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { GoDotFill } from "react-icons/go";
 import { IconContext } from "react-icons";
 import { useContext, useState } from "react";
 import { Context } from "../context/Context";
@@ -18,26 +20,18 @@ import PopupForm from "./PopUpForm";
 const SideBar = () => {
   const navigate = useNavigate();
   const [extended, setExtended] = useState(true);
-  const {
-    onSent,
-    prevPrompts,
-    setRecentPrompt,
-    newChat,
-    setPrevPrompts,
-    getUser,
-    userName,
-  } = useContext(Context);
-  const [selectedPrompt, setSelectedPrompt] = useState(null); // State for selected prompt
-  const [dialogOpen, setDialogOpen] = useState(false); // State to handle dial
+  const { prevPrompts, newChat, setPrevPrompts, getUser, userName } =
+    useContext(Context);
+  const [selectedPrompt, setSelectedPrompt] = useState(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [hoveredPrompt, setHoveredPrompt] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleDeletePrompt = async (id) => {
     const token = Cookies.get("token");
-    console.log(token);
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/v1/prompts/${id}`,
+        `https://nebula9-ai-cook-it-up.onrender.com/api/v1/prompts/${id}`,
         { userName },
         {
           headers: {
@@ -47,12 +41,12 @@ const SideBar = () => {
       );
       if (response.status === 200) {
         setPrevPrompts((prev) => prev.filter((prompt) => prompt.id !== id));
-        alert("Deleted successfully");
+        toast.success("Deleted successfully");
       } else {
-        console.error("Failed to delete prompt");
+        toast.error("Failed to delete prompt");
       }
     } catch (error) {
-      console.error("Error deleting prompt:", error);
+      toast.error("Error deleting prompt:", error);
     }
   };
 
@@ -61,23 +55,19 @@ const SideBar = () => {
     getUser();
   };
 
-  // const loadPrompt = async (prompt) => {
-  //   setRecentPrompt(prompt);
-  //   await onSent(prompt);
-  // };
-
   const handlePromptClick = (prompt) => {
-    setSelectedPrompt(prompt); // Set the selected prompt
-    setDialogOpen(true); // Open the dialog
+    setSelectedPrompt(prompt);
+    setDialogOpen(true);
   };
 
   const closeDialog = () => {
-    setDialogOpen(false); // Close the dialog
-    setSelectedPrompt(null); // Reset selected prompt
+    setDialogOpen(false);
+    setSelectedPrompt(null);
   };
 
   return (
     <IconContext.Provider value={{ className: "react-icons" }}>
+      <ToastContainer />
       <div className="sidebar">
         <div className="top">
           <IconContext.Provider value={{ className: "menu" }}>
@@ -98,7 +88,7 @@ const SideBar = () => {
                     onMouseLeave={() => setHoveredPrompt(null)}
                     className="recent-entry"
                   >
-                    <FaRegMessage />
+                    <GoDotFill />
                     <p
                       onClick={() => {
                         handlePromptClick(item);
@@ -124,12 +114,8 @@ const SideBar = () => {
         </div>
         <div className="bottom">
           <div className="bottom-item recent-entry" onClick={toggleForm}>
-            <MdOutlineQuestionMark />
-            {extended ? <p>Help</p> : null}
-          </div>
-          <div className="bottom-item recent-entry">
-            <AiOutlineHistory />
-            {extended ? <p>Activity</p> : null}
+            <MdFastfood />
+            {extended ? <p>User Preference</p> : null}
           </div>
           <div
             className="bottom-item recent-entry"
@@ -151,9 +137,7 @@ const SideBar = () => {
               <button className="dialog-close" onClick={closeDialog}>
                 &times;
               </button>
-
-              <h3 className="dialog-title">Prompt Details</h3>
-              {/* Render HTML content safely */}
+              <h3 className="dialog-title">Recipe Details</h3>
               <div
                 className="dialog-html"
                 dangerouslySetInnerHTML={{ __html: selectedPrompt.prompt_text }}

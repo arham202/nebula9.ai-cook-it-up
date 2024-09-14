@@ -31,7 +31,7 @@ exports.getPrevPromptsgenerateResponse = async (req, res, next) => {
     const result = await chatSession.sendMessage(prompt);
     const responseText = result.response.text();
 
-    console.log(responseText);
+    // console.log(responseText);
 
     res.status(200).json({ response: responseText });
   } catch (error) {

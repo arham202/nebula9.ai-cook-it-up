@@ -6,19 +6,7 @@ import { Bell, Check, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./NotificationSystem.css";
 
-// DROP TABLE notifications;
-
-// CREATE TABLE notifications (
-//   id SERIAL PRIMARY KEY,
-//   username VARCHAR NOT NULL,
-//   is_read BOOLEAN DEFAULT FALSE,
-//   notification_text TEXT NOT NULL,
-//   created_at TIMESTAMPTZ DEFAULT NOW()
-// );
-
-// Select * from notifications;
-
-const socket = io("http://localhost:8080");
+const socket = io("https://nebula9-ai-cook-it-up.onrender.com");
 
 const NotificationSystem = () => {
   const [notifications, setNotifications] = useState([]);
@@ -32,8 +20,9 @@ const NotificationSystem = () => {
     const fetchNotifications = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/notifications/${userName}`
+          `https://nebula9-ai-cook-it-up.onrender.com/notifications/${userName}`
         );
+        console.log(res);
         setNotifications(res.data);
         setUnreadCount(res.data.filter((n) => !n.is_read).length);
       } catch (error) {

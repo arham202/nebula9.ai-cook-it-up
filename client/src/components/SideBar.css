@@ -22,7 +22,7 @@
 }
 
 .sidebar .new-chat {
-  margin-top: 50px;
+  margin-top: 20px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -35,9 +35,13 @@
 }
 
 .sidebar .recent {
+  flex: 1;
   display: flex;
   flex-direction: column;
   animation: fadeIn 1.5s;
+  overflow-y: auto;
+  padding: 10px;
+  max-height: calc(100vh - 200px);
 }
 
 .sidebar .recent-title {
@@ -49,12 +53,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
-  padding-right: 40px; /* Reserve space for the delete icon */
+  padding: 8px;
+  padding-right: 40px;
   border-radius: 50px;
   color: #282828;
   cursor: pointer;
-  position: relative; /* Allow absolute positioning of delete icon */
+  position: relative;
+  transition: background 0.3s ease;
 }
 
 .sidebar .recent-entry:hover {
@@ -83,23 +88,23 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker backdrop */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(5px); /* Adds a subtle blur effect */
+  backdrop-filter: blur(5px);
   transition: opacity 0.3s ease;
 }
 
 .dialog-content {
   background-color: #fefefe;
-  padding: 40px; /* Increased padding for more space */
+  padding: 40px;
   border-radius: 16px;
-  width: 700px; /* Increased width */
-  max-width: 90vw; /* Make it responsive to viewport */
-  height: 600px; /* Increased height */
-  max-height: 90vh; /* Make it responsive vertically */
+  width: 700px;
+  max-width: 90vw;
+  height: 600px;
+  max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -137,7 +142,7 @@
   right: 20px;
   background: none;
   border: none;
-  font-size: 24px; /* Larger close icon */
+  font-size: 24px;
   cursor: pointer;
   color: #888;
   transition: color 0.3s ease;
@@ -148,19 +153,19 @@
 }
 
 .delete-icon {
-  position: absolute; /* Position the icon absolutely within the entry */
-  right: 10px; /* Align to the right edge of the entry */
-  top: 50%; /* Center the icon vertically */
-  transform: translateY(-50%); /* Adjust for centering */
-  visibility: hidden; /* Hidden by default */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
   color: #ff4d4d;
   cursor: pointer;
 }
 
 .recent-entry:hover .delete-icon {
-  visibility: visible; /* Show icon on hover */
+  visibility: visible;
 }
 
 .delete-icon:hover {
-  color: #e60000; /* Change color on hover */
+  color: #e60000;
 }

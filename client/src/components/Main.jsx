@@ -1,13 +1,16 @@
 import { IconContext } from "react-icons";
 import "./Main.css";
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { LuChefHat } from "react-icons/lu";
-import { BiSolidImageAdd } from "react-icons/bi";
-import { IoNotifications } from "react-icons/io5";
-import { MdMic, MdSend } from "react-icons/md";
-import { useContext, useEffect } from "react";
+import { PiChefHat } from "react-icons/pi";
+import { FaBook } from "react-icons/fa";
+import { FiTv } from "react-icons/fi";
+import { MdSend, MdFastfood } from "react-icons/md";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/Context";
-import logo from "../../src/assets/Google-Bard-Logo.png";
+import logo from "../../src/assets/logo.png";
 import NotificationSystem from "./NotificationSystem";
+import PopupForm from "./PopUpForm";
 
 const Main = () => {
   const {
@@ -22,16 +25,22 @@ const Main = () => {
     fetchPrevPrompts,
     getUser,
   } = useContext(Context);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     fetchPrevPrompts();
     getUser();
   }, []);
 
+  const toggleForm = () => {
+    setIsFormOpen((prev) => !prev);
+    getUser();
+  };
+
   return (
     <div className="main">
       <div className="nav">
-        <p>Recipe Generator</p>
+        <p className="brand">Cook It Up !</p>
         <IconContext.Provider value={{ className: "notification-icon" }}>
           <NotificationSystem />
         </IconContext.Provider>
@@ -40,34 +49,64 @@ const Main = () => {
         {!showResult ? (
           <>
             <div className="greet">
-              <p>
-                <span>Hello,{userName}.</span>
+              <div className="logo-container">
+                <IconContext.Provider value={{ className: "logo" }}>
+                  <PiChefHat />
+                </IconContext.Provider>
+              </div>
+              <p className="greeting-text">
+                <span>Hello, {userName}.</span>
               </p>
-              <p>How can I help you today ?</p>
+              <p className="message-text">How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
-                <IconContext.Provider value={{ className: "chef-icon" }}>
-                  <LuChefHat />
+              <div
+                className="card"
+                onClick={() => {
+                  onSent(
+                    "Generate a pasta recipe. Provide the recipe name, ingredients list, and step-by-step instructions. Format the response using bold for heading only and section heading (**text**), italic (*text*),line breaks (\\n) and give me a beautifully formatted response."
+                  );
+                }}
+              >
+                <p>Not sure what to do? Click here to find out!</p>
+                <IconContext.Provider value={{ className: "book-icon" }}>
+                  <FaBook />
                 </IconContext.Provider>
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
-                <IconContext.Provider value={{ className: "chef-icon" }}>
-                  <LuChefHat />
+              <div
+                className="card"
+                onClick={() => {
+                  onSent(
+                    "Generate a recipe from a Tv Show or Anime. Provide the TvShow or Anime Name ,recipe name, ingredients list, and step-by-step instructions. Format the response using bold for heading only and section heading (**text**), italic (*text*),line breaks (\\n) and give me a beautifully formatted response."
+                  );
+                }}
+              >
+                <p>
+                  TV-Inspired Delights: Bring Your Favorite Show Recipes to Life
+                </p>
+                <IconContext.Provider value={{ className: "tv-icon" }}>
+                  <FiTv />
                 </IconContext.Provider>
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
+              <div
+                className="card"
+                onClick={() => {
+                  onSent(
+                    "Generate a recipe using some ingredients. Provide the recipe name, ingredients list, and step-by-step instructions. Format the response using bold for heading only and section heading (**text**), italic (*text*),line breaks (\\n) and give me a beautifully formatted response."
+                  );
+                }}
+              >
+                <p>
+                  Ready for a surprise? Dive into something unexpected today!
+                </p>
                 <IconContext.Provider value={{ className: "chef-icon" }}>
-                  <LuChefHat />
+                  <GiPerspectiveDiceSixFacesRandom />
                 </IconContext.Provider>
               </div>
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
+              <div className="card" onClick={toggleForm}>
+                <p>Tell us what you like! What’s your preference?</p>
                 <IconContext.Provider value={{ className: "chef-icon" }}>
-                  <LuChefHat />
+                  <MdFastfood />
                 </IconContext.Provider>
               </div>
             </div>
@@ -103,12 +142,10 @@ const Main = () => {
               }}
               value={input}
               type="text"
-              placeholder="Enter a prompt here"
+              placeholder="Enter your ingredients here..."
             />
             <div>
               <IconContext.Provider value={{ className: "input-icons" }}>
-                <BiSolidImageAdd />
-                <MdMic />
                 {input ? <MdSend onClick={() => onSent()} /> : null}
               </IconContext.Provider>
             </div>
@@ -119,6 +156,7 @@ const Main = () => {
           </p>
         </div>
       </div>
+      {isFormOpen && <PopupForm isOpen={isFormOpen} onClose={toggleForm} />}
     </div>
   );
 };

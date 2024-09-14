@@ -1,78 +1,86 @@
+import { useContext, useState, useEffect } from "react";
+import { PiChefHat } from "react-icons/pi";
 import * as Components from "../components/Components";
-import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./Form.css";
 import { Context } from "../context/Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./Dashboard.css";
 
 const Form = () => {
-  const [signIn, toggle] = useState(true);
-
+  const [signIn, setSignIn] = useState(true);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { userName, setUserName } = useContext(Context);
-  //   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setUserName("");
+  }, [signIn]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "https://nebula9-ai-cook-it-up.onrender.com/api/auth/signin",
-        {
-          username: userName,
-          password,
-        }
+        { username: userName, password }
       );
-
-      console.log(response);
-
       const token = response.data.token;
-
-      // Store the JWT token in cookies (you can set an expiry if needed)
-      Cookies.set("token", token, { expires: 7 }); // Expires in 7 days
-      console.log("Logged in successfully, Token:", token);
+      Cookies.set("token", token, { expires: 7 });
+      toast.success("Logged in successfully");
       setUserName(userName);
       navigate("/dashboard");
     } catch (err) {
-      //   setError(err.response?.data?.message || "Login failed");
-      alert(err.response?.data?.message || "Login failed");
+      toast.error(
+        err.response?.data?.message ||
+          "Login failed. Please check your credentials."
+      );
     }
   };
 
   const handleSignup = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(
         "https://nebula9-ai-cook-it-up.onrender.com/api/auth/signup",
-        {
-          username: userName,
-          email,
-          password,
-        }
+        { username: userName, email, password }
       );
-
       const token = response.data.token;
-
-      // Store the JWT token in cookies (you can set an expiry if needed)
       Cookies.set("token", token, { expires: 7 });
-      console.log("Signed up successfully, Token:", token);
-      alert("Signed up successfully");
-
-      setUserName("");
-      setEmail("");
-      setPassword("");
-      toggle(true);
+      toast.success("Signed up successfully");
+      setUserName(userName);
+      setSignIn(true);
     } catch (err) {
-      //   setError(err.response?.data?.message || "Signup failed");
-      alert(err.response?.data?.message || "Signup failed");
+      toast.error(err.response?.data?.message || "Signup failed");
     }
   };
 
   return (
     <div className="form">
+      <ToastContainer />
+      <div
+        style={{
+          textAlign: "center",
+        }}
+      >
+        {Components.ChefIcon ? (
+          <Components.ChefIcon style={{ fontSize: "50px" }} />
+        ) : (
+          <PiChefHat style={{ fontSize: "40px" }} />
+        )}
+        {Components.ChefTitle ? (
+          <Components.ChefTitle>Cook It Up!</Components.ChefTitle>
+        ) : (
+          <h1 style={{ fontSize: "36px", color: "#4285f4", marginTop: "10px" }}>
+            Cook It Up!
+          </h1>
+        )}
+      </div>
       <Components.Container>
         <Components.SignUpContainer signinIn={signIn}>
           <Components.Form onSubmit={handleSignup}>
@@ -97,12 +105,11 @@ const Form = () => {
               required
               placeholder="Password"
             />
-            <Components.Button>Sign Up</Components.Button>
+            <Components.Button type="submit">Sign Up</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>
 
         <Components.SignInContainer signinIn={signIn}>
-          {/* {error && <p style={{ color: "black" }}>{error}</p>} MAKE IT A TOAST NOTIFICATION  */}
           <Components.Form onSubmit={handleLogin}>
             <Components.Title>Sign in</Components.Title>
             <Components.Input
@@ -122,7 +129,7 @@ const Form = () => {
             <Components.Anchor href="#">
               Forgot your password?
             </Components.Anchor>
-            <Components.Button>Sigin In</Components.Button>
+            <Components.Button type="submit">Sign In</Components.Button>
           </Components.Form>
         </Components.SignInContainer>
 
@@ -133,7 +140,7 @@ const Form = () => {
               <Components.Paragraph>
                 To keep connected with us please login with your personal info
               </Components.Paragraph>
-              <Components.GhostButton onClick={() => toggle(true)}>
+              <Components.GhostButton onClick={() => setSignIn(true)}>
                 Sign In
               </Components.GhostButton>
             </Components.LeftOverlayPanel>
@@ -143,8 +150,8 @@ const Form = () => {
               <Components.Paragraph>
                 Enter Your personal details and start journey with us
               </Components.Paragraph>
-              <Components.GhostButton onClick={() => toggle(false)}>
-                Sigin Up
+              <Components.GhostButton onClick={() => setSignIn(false)}>
+                Sign Up
               </Components.GhostButton>
             </Components.RightOverlayPanel>
           </Components.Overlay>

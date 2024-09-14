@@ -2,10 +2,10 @@ const pool = require("../db");
 
 exports.getPrevPrompts = async (req, res, next) => {
   const { userName } = req.body;
-  console.log(userName);
+  // console.log(userName);
   try {
     const result = await pool.query(
-      "SELECT id, prompt_text FROM prompts WHERE userName = $1 ORDER BY id DESC LIMIT 10",
+      "SELECT id, prompt_text FROM prompts WHERE userName = $1 ORDER BY id",
       [userName]
     );
     res.json(result.rows);

@@ -76,7 +76,7 @@ const PopupForm = ({ isOpen, onClose }) => {
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
-        "http://localhost:8080/api/v1/set-user",
+        "https://nebula9-ai-cook-it-up.onrender.com/api/v1/set-user",
         {
           userName: savedData.name,
           country: savedData.country,

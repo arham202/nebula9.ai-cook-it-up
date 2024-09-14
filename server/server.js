@@ -7,18 +7,18 @@ const app = require("./app");
 const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: "*" } });
 
-// const db = require("./models");
-
-// db.sequelize.sync({ force: false }).then(() => {
-//   console.log("Drop and Resync Db");
-// });
-
 const fetchNotifications = async (username) => {
-  const result = await pool.query(
-    "SELECT * FROM notifications WHERE username = $1 AND is_read = FALSE ORDER BY created_at DESC",
-    [username]
-  );
-  return result.rows;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM notifications WHERE username = $1 AND is_read = FALSE ORDER BY created_at DESC",
+      [username]
+    );
+    // console.log(result);
+    res.json(result.rows.length > 0 ? result.rows : []);
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const markAsRead = async (id) => {
@@ -54,7 +54,7 @@ app.post("/send-notification", async (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  // console.log("a user connected");
 
   socket.on("new-notification", async (data) => {
     const { username, notificationText } = data;
@@ -72,7 +72,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    // console.log("user disconnected");
   });
 });
 

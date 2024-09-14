@@ -2,7 +2,7 @@ const pool = require("../db");
 
 exports.getUserInfo = async (req, res) => {
   const { userName } = req.body;
-  console.log("userName", userName);
+  // console.log("userName", userName);
 
   if (!userName) {
     return res.status(400).json({ error: "Missing userName" });
