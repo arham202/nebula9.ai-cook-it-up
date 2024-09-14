@@ -19,7 +19,7 @@ const Form = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signin",
+        "https://nebula9-ai-cook-it-up.onrender.com/api/auth/signin",
         {
           username: userName,
           password,
@@ -46,7 +46,7 @@ const Form = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/auth/signup",
+        "https://nebula9-ai-cook-it-up.onrender.com/api/auth/signup",
         {
           username: userName,
           email,
