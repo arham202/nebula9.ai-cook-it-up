@@ -1,0 +1,166 @@
+.sidebar {
+  min-height: 100vh;
+  max-width: 20vw;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f0f4f9;
+  padding: 25px 20px;
+}
+
+.react-icons {
+  width: 20px;
+  height: 20px;
+}
+
+.menu {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.sidebar .new-chat {
+  margin-top: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  background-color: #e6eaf1;
+  border-radius: 50px;
+  font-size: 14px;
+  color: grey;
+  cursor: pointer;
+}
+
+.sidebar .recent {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 1.5s;
+}
+
+.sidebar .recent-title {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.sidebar .recent-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  padding-right: 40px; /* Reserve space for the delete icon */
+  border-radius: 50px;
+  color: #282828;
+  cursor: pointer;
+  position: relative; /* Allow absolute positioning of delete icon */
+}
+
+.sidebar .recent-entry:hover {
+  background-color: #e2e6eb;
+}
+
+.sidebar .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar .bottom-item {
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px); /* Adds a subtle blur effect */
+  transition: opacity 0.3s ease;
+}
+
+.dialog-content {
+  background-color: #fefefe;
+  padding: 40px; /* Increased padding for more space */
+  border-radius: 16px;
+  width: 700px; /* Increased width */
+  max-width: 90vw; /* Make it responsive to viewport */
+  height: 600px; /* Increased height */
+  max-height: 90vh; /* Make it responsive vertically */
+  overflow-y: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: slide-in 0.4s ease;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.dialog-title {
+  margin-top: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #333;
+}
+
+.dialog-html {
+  font-family: "Roboto", sans-serif;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.dialog-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px; /* Larger close icon */
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.dialog-close:hover {
+  color: #333;
+}
+
+.delete-icon {
+  position: absolute; /* Position the icon absolutely within the entry */
+  right: 10px; /* Align to the right edge of the entry */
+  top: 50%; /* Center the icon vertically */
+  transform: translateY(-50%); /* Adjust for centering */
+  visibility: hidden; /* Hidden by default */
+  color: #ff4d4d;
+  cursor: pointer;
+}
+
+.recent-entry:hover .delete-icon {
+  visibility: visible; /* Show icon on hover */
+}
+
+.delete-icon:hover {
+  color: #e60000; /* Change color on hover */
+}
