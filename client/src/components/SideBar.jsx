@@ -16,6 +16,7 @@ import { Context } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import PopupForm from "./PopUpForm";
+import { GoBug } from "react-icons/go";
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -50,6 +51,21 @@ const SideBar = () => {
     }
   };
 
+  const testNotification = async () => {
+    try {
+      toast.success("Successfully Send");
+      await axios.post(
+        "https://nebula9-ai-cook-it-up.onrender.com/send-notification",
+        {
+          username: userName,
+          notificationText: "Hello! from the server powered by sockets.",
+        }
+      );
+    } catch (err) {
+      toast.error(err.response?.data?.message);
+    }
+  };
+
   const toggleForm = () => {
     setIsFormOpen((prev) => !prev);
     getUser();
@@ -67,7 +83,6 @@ const SideBar = () => {
 
   return (
     <IconContext.Provider value={{ className: "react-icons" }}>
-      <ToastContainer />
       <div className="sidebar">
         <div className="top">
           <IconContext.Provider value={{ className: "menu" }}>
@@ -119,6 +134,13 @@ const SideBar = () => {
           </div>
           <div
             className="bottom-item recent-entry"
+            onClick={() => testNotification()}
+          >
+            <GoBug />
+            {extended ? <p>Test Notification</p> : null}
+          </div>
+          <div
+            className="bottom-item recent-entry"
             onClick={() => {
               navigate("/logout");
             }}
@@ -146,6 +168,7 @@ const SideBar = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
     </IconContext.Provider>
   );
 };

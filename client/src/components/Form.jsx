@@ -9,6 +9,9 @@ import { Context } from "../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Dashboard.css";
+import { io } from "socket.io-client";
+
+const socket = io("https://nebula9-ai-cook-it-up.onrender.com");
 
 const Form = () => {
   const [signIn, setSignIn] = useState(true);
@@ -54,6 +57,15 @@ const Form = () => {
       Cookies.set("token", token, { expires: 7 });
       toast.success("Signed up successfully");
       setUserName(userName);
+
+      await axios.post(
+        "https://nebula9-ai-cook-it-up.onrender.com/send-notification",
+        {
+          username: userName,
+          notificationText: "Welcome to Cook It Up !",
+        }
+      );
+
       setSignIn(true);
     } catch (err) {
       toast.error(err.response?.data?.message || "Signup failed");
@@ -126,9 +138,7 @@ const Form = () => {
               required
               placeholder="Password"
             />
-            <Components.Anchor href="#">
-              Forgot your password?
-            </Components.Anchor>
+            <Components.Anchor href="#"></Components.Anchor>
             <Components.Button type="submit">Sign In</Components.Button>
           </Components.Form>
         </Components.SignInContainer>

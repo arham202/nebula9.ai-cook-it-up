@@ -25,7 +25,7 @@ app.post("/notifications/:username", async (req, res) => {
       "SELECT * FROM notifications WHERE username = $1 AND is_read = FALSE ORDER BY created_at DESC",
       [username]
     );
-    console.log(result);
+    // console.log(result);
     res.status(200).json({ data: result.rows });
   } catch (error) {
     console.error("Error fetching notifications:", error);

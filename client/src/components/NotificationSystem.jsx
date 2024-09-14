@@ -22,7 +22,7 @@ const NotificationSystem = () => {
         const res = await axios.post(
           `https://nebula9-ai-cook-it-up.onrender.com/notifications/${userName}`
         );
-        console.log(res);
+        // console.log(res);
         setNotifications(res.data.data);
         setUnreadCount(res.data.data.filter((n) => !n.is_read).length);
       } catch (error) {
@@ -36,12 +36,12 @@ const NotificationSystem = () => {
   useEffect(() => {
     const handleNewNotification = (newNotification) => {
       if (newNotification.username === userName) {
-        console.log("hehe");
-        console.log(newNotification);
+        // console.log("hehe");
+        // console.log(newNotification);
         setNotifications((prev) => [newNotification, ...prev]);
         setUnreadCount((prev) => prev + 1);
       } else {
-        console.log("done");
+        // console.log("");
       }
     };
 
