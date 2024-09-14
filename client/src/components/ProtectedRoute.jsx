@@ -18,9 +18,12 @@ const ProtectedRoute = ({ children }) => {
       }
 
       try {
-        await axios.get("/api/protected", {
-          headers: { "x-access-token": token },
-        });
+        await axios.get(
+          "https://nebula9-ai-cook-it-up.onrender.com/auth/api/protected",
+          {
+            headers: { "x-access-token": token },
+          }
+        );
         setIsAuthenticated(true);
       } catch (error) {
         console.log(error.message);
