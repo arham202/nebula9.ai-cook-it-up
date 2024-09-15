@@ -40,7 +40,7 @@ const Form = () => {
       Cookies.set("userName", userName);
       setUserName(userName);
       toast.success("Logged in successfully");
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
     } catch (err) {
       toast.error(
         err.response?.data?.message ||
