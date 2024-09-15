@@ -9,10 +9,10 @@
 <h4 align="center">The Custom Recipe Generator is a web application that creates personalized recipes based on user dietary preferences and available ingredients.</h4>
 <p align="center">
   <a href="#deployed-version">Demo</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#update-your-profile">Update Your Profile</a> •
-  <a href="#api-usage">API Usage</a> •
-  <a href="#installation-guide">Installation</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#project-structure">Project Structure</a> •
+  <a href="#installation-guide">Installation Guide</a> •
+  <a href="#api-endpoints">API Endpoints</a> •
   <a href="#database-setup">Database Setup</a> •
   <a href="#authentication">Authentication</a> •
   <a href="#deployment-guide">Deployment Guide</a>
@@ -25,6 +25,24 @@ Live demo 👉 : https://nebula9-ai-cook-it-up.onrender.com/
 API Documentation 👉 : https://documenter.getpostman.com/view/36250312/2sAXqp83Ne#f2ff27e3-0299-4410-ad7b-077487aaa515
 
 **Note:** Since the application is hosted on a free-tier server, it may take some time to load when you first visit. Please be patient, and if it doesn't load right away, try reloading the page after 1-2 minutes.
+
+## Tech Stack
+
+- **Frontend:**
+  - [React.js](https://reactjs.org/)
+  - [Vite](https://vitejs.dev/) for development and build
+  - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) for styling
+
+- **Backend:**
+  - [Express.js](https://expressjs.com/) for server-side logic
+  - [PostgreSQL](https://www.postgresql.org/) for database management
+  - [JWT](https://jwt.io/) for authentication
+
+- **Generative AI:**
+  - [Gemini AI](https://ai.google.dev/) for generating recipes (replace with actual service if applicable)
+
+- **Deployment:**
+  - [Render](https://render.com) for deployment
 
 ## Project Structure
   ``` bash
