@@ -26,6 +26,8 @@ API Documentation 👉 : https://documenter.getpostman.com/view/36250312/2sAXqp8
 
 **Note:** Since the application is hosted on a free-tier server, it may take some time to load when you first visit. Please be patient, and if it doesn't load right away, try reloading the page after 1-2 minutes.
 
+<img src="https://github.com/arham202/nebula9.ai-cook-it-up/blob/9a5b555142ff150687b8638b4adf955b9ccd09af/homescreen.png" alt="Cook It Up !">
+
 ## Tech Stack
 
 - **Frontend:**
