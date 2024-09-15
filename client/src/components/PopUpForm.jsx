@@ -89,7 +89,7 @@ const PopupForm = ({ isOpen, onClose }) => {
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       alert("Updated Successfully");
       getUser();
     } catch (err) {

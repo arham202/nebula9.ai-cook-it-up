@@ -9,10 +9,10 @@
 <h4 align="center">The Custom Recipe Generator is a web application that creates personalized recipes based on user dietary preferences and available ingredients.</h4>
 <p align="center">
   <a href="#deployed-version">Demo</a> •
-  <a href="#key-features">Key Features</a> •
-  <a href="#update-your-profile">Update Your Profile</a> •
-  <a href="#api-usage">API Usage</a> •
-  <a href="#installation-guide">Installation</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#project-structure">Project Structure</a> •
+  <a href="#installation-guide">Installation Guide</a> •
+  <a href="#api-endpoints">API Endpoints</a> •
   <a href="#database-setup">Database Setup</a> •
   <a href="#authentication">Authentication</a> •
   <a href="#deployment-guide">Deployment Guide</a>
@@ -25,6 +25,24 @@ Live demo 👉 : https://nebula9-ai-cook-it-up.onrender.com/
 API Documentation 👉 : https://documenter.getpostman.com/view/36250312/2sAXqp83Ne#f2ff27e3-0299-4410-ad7b-077487aaa515
 
 **Note:** Since the application is hosted on a free-tier server, it may take some time to load when you first visit. Please be patient, and if it doesn't load right away, try reloading the page after 1-2 minutes.
+
+## Tech Stack
+
+- **Frontend:**
+  - [React.js](https://reactjs.org/)
+  - [Vite](https://vitejs.dev/) for development and build
+  - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) for styling
+
+- **Backend:**
+  - [Express.js](https://expressjs.com/) for server-side logic
+  - [PostgreSQL](https://www.postgresql.org/) for database management
+  - [JWT](https://jwt.io/) for authentication
+
+- **Generative AI:**
+  - [Gemini AI](https://ai.google.dev/) for generating recipes (replace with actual service if applicable)
+
+- **Deployment:**
+  - [Render](https://render.com) for deployment
 
 ## Project Structure
   ``` bash
@@ -86,15 +104,15 @@ cd <project-folder>
 ```
 
 #### 2. Setting Up the Server
-#### 1. Navigate to the server directory:
+#### Navigate to the server directory:
 ```bash
 cd server
 ```
-#### 2. Install the server dependencies:
+#### Install the server dependencies:
 ```bash
 npm install
 ```
-#### 3. Configure the environment variables:
+#### Configure the environment variables:
 ```bash
 # PostgreSQL database configuration
 USER
@@ -106,31 +124,31 @@ PASSWORD
 APIKEY
 ```
 
-#### 4. Start the server:
+#### Start the server:
   ```bash
   npm start
   ```
 
 
 #### 3. Setting Up the Client
-#### 1. Navigate to the client directory:
+#### Navigate to the client directory:
 ```bash
 cd ../client
 ```
-#### 2. Install the client dependencies:
+#### Install the client dependencies:
 ```bash
 npm install
 ```
-#### 3. Start the client application:
+#### Start the client application:
 ```bash
 npm run dev
 ```
 
 
-#### 3. Setting Up the Database
-#### 1. Ensure PostgreSQL is running.
-#### 2. Create a new PostgreSQL database for your application.
-#### 3. Update the ```config.env``` file in the ```server``` directory with your database connection details.
+#### 4. Setting Up the Database
+#### Ensure PostgreSQL is running.
+#### Create a new PostgreSQL database for your application.
+#### Update the ```config.env``` file in the ```server``` directory with your database connection details.
 
 ## API Endpoints
 
@@ -288,47 +306,44 @@ The application is deployed on Render. Below are the steps and considerations fo
 
 ### 1. Set Up Render Account
 
-1. **Create an Account:** Sign up for a Render account at [Render](https://render.com).
-2. **Create a New Web Service:**
-   - Navigate to the Render dashboard and create a new web service.
+- **Create an Account:** Sign up for a Render account at [Render](https://render.com).
+- **Create a New Web Service:** Navigate to the Render dashboard and create a new web service.
 
 ### 2. Deploy
 
-1. **Connect Your Repository:**
-   - Connect your GitHub or GitLab repository where both your React application and Express.js server code are stored.
-
-2. **Configure Build and Start Commands:**
+- **Connect Your Repository:** Connect your GitHub or GitLab repository where both your React application and Express.js server code are stored.
+- **Configure Build and Start Commands:**
    - **Build Command:** `npm run build`
    - **Start Command:** `npm run start`
 
    Ensure that your `package.json` scripts are properly configured to handle both the client and server build and start processes.
 
-3. **Environment Variables:**
+- **Environment Variables:**
    - Add any required environment variables in the Render dashboard under the "Environment" settings. This includes API keys, database connection details, and other configuration settings.
 
-4. **Deploy:**
+- **Deploy:**
    - Click the "Deploy" button to start the deployment process. Render will build and deploy your application.
 
 ### 3. Configure Database
 
-1. **Set Up Database:**
+- **Set Up Database:**
    - If using Render's managed PostgreSQL service, set up a new PostgreSQL instance from the Render dashboard.
 
-2. **Update Environment Variables:**
+- **Update Environment Variables:**
    - Ensure that the database connection details (e.g., `USER`, `HOST`, `DATABASE`, `PASSWORD`) are correctly set in your environment variables.
 
 ### 4. Monitor and Maintain
 
-1. **Monitor Logs:**
+- **Monitor Logs:**
    - Use Render's logging features to monitor the application and server logs for any issues.
 
-2. **Automatic Deployments:**
+- **Automatic Deployments:**
    - Configure automatic deployments for continuous integration. Render supports automatic redeployments when you push changes to your repository.
 
-3. **Scaling and Performance:**
+- **Scaling and Performance:**
    - Adjust scaling settings and resources as needed based on your application's performance and traffic requirements.
 
-4. **WebSocket Support:**
+- **WebSocket Support:**
    - If deploying to other services, ensure that they support WebSocket servers if your application uses WebSocket for real-time communication.
 
 
