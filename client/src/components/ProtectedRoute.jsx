@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -36,12 +37,18 @@ const ProtectedRoute = ({ children }) => {
     checkAuth();
   }, []);
 
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      navigate("/", { replace: true });
+    }
+  }, [loading, isAuthenticated, navigate]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return null;
   }
 
   return children;

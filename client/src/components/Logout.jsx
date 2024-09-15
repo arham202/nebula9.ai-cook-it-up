@@ -6,8 +6,9 @@ const Logout = () => {
   const navigate = useNavigate();
   useEffect(() => {
     Cookies.remove("token");
-    navigate("/login");
-  }, [navigate]);
+    Cookies.remove("userName");
+    navigate("/");
+  }, []);
 
   return (
     <div>

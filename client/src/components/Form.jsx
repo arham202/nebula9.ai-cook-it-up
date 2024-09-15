@@ -14,7 +14,7 @@ import { io } from "socket.io-client";
 const socket = io("https://nebula9-ai-cook-it-up.onrender.com");
 
 const Form = () => {
-  const [signIn, setSignIn] = useState(true);
+  const [signIn, setSignIn] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +28,8 @@ const Form = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    Cookies.remove("token");
+    Cookies.remove("userName");
     try {
       const response = await axios.post(
         "https://nebula9-ai-cook-it-up.onrender.com/api/auth/signin",
@@ -35,8 +37,9 @@ const Form = () => {
       );
       const token = response.data.token;
       Cookies.set("token", token, { expires: 7 });
-      toast.success("Logged in successfully");
+      Cookies.set("userName", userName);
       setUserName(userName);
+      toast.success("Logged in successfully");
       navigate("/dashboard");
     } catch (err) {
       toast.error(

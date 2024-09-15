@@ -4,7 +4,7 @@ const socketIo = require("socket.io");
 const http = require("http");
 
 const dotenv = require("dotenv");
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./server/config.env" });
 
 const pool = require("./db");
 const app = require("./app");
@@ -19,7 +19,7 @@ const markAsRead = async (id) => {
 
 app.post("/notifications/:username", async (req, res) => {
   const { username } = req.params;
-  console.log("hi there");
+  // console.log("hi there");
   try {
     const result = await pool.query(
       "SELECT * FROM notifications WHERE username = $1 AND is_read = FALSE ORDER BY created_at DESC",

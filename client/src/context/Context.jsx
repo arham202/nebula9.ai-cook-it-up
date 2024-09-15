@@ -14,9 +14,7 @@ const ContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
 
-  const [userName, setUserName] = useState(
-    () => localStorage.getItem("userName") || ""
-  );
+  const [userName, setUserName] = useState(() => Cookies.get("userName") || "");
 
   const fetchPrevPrompts = async () => {
     console.log("Fetching previous prompts...");
@@ -95,7 +93,7 @@ const ContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("userName", userName);
+    Cookies.get("userName");
   }, [userName]);
 
   const delayPara = (index, nextWord) => {

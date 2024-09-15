@@ -11,6 +11,7 @@ import { Context } from "../context/Context";
 import logo from "../../src/assets/logo.png";
 import NotificationSystem from "./NotificationSystem";
 import PopupForm from "./PopUpForm";
+import Cookies from "js-cookie";
 
 const Main = () => {
   const {
@@ -22,12 +23,15 @@ const Main = () => {
     setInput,
     input,
     userName,
+    setUserName,
     fetchPrevPrompts,
     getUser,
   } = useContext(Context);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
+    const username = Cookies.get("userName");
+    setUserName(username);
     fetchPrevPrompts();
     getUser();
   }, []);
