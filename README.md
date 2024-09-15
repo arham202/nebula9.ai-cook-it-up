@@ -104,15 +104,15 @@ cd <project-folder>
 ```
 
 #### 2. Setting Up the Server
-#### 1. Navigate to the server directory:
+#### Navigate to the server directory:
 ```bash
 cd server
 ```
-#### 2. Install the server dependencies:
+#### Install the server dependencies:
 ```bash
 npm install
 ```
-#### 3. Configure the environment variables:
+#### Configure the environment variables:
 ```bash
 # PostgreSQL database configuration
 USER
@@ -124,31 +124,31 @@ PASSWORD
 APIKEY
 ```
 
-#### 4. Start the server:
+#### Start the server:
   ```bash
   npm start
   ```
 
 
 #### 3. Setting Up the Client
-#### 1. Navigate to the client directory:
+#### Navigate to the client directory:
 ```bash
 cd ../client
 ```
-#### 2. Install the client dependencies:
+#### Install the client dependencies:
 ```bash
 npm install
 ```
-#### 3. Start the client application:
+#### Start the client application:
 ```bash
 npm run dev
 ```
 
 
-#### 3. Setting Up the Database
-#### 1. Ensure PostgreSQL is running.
-#### 2. Create a new PostgreSQL database for your application.
-#### 3. Update the ```config.env``` file in the ```server``` directory with your database connection details.
+#### 4. Setting Up the Database
+#### Ensure PostgreSQL is running.
+#### Create a new PostgreSQL database for your application.
+#### Update the ```config.env``` file in the ```server``` directory with your database connection details.
 
 ## API Endpoints
 
@@ -306,47 +306,44 @@ The application is deployed on Render. Below are the steps and considerations fo
 
 ### 1. Set Up Render Account
 
-1. **Create an Account:** Sign up for a Render account at [Render](https://render.com).
-2. **Create a New Web Service:**
-   - Navigate to the Render dashboard and create a new web service.
+- **Create an Account:** Sign up for a Render account at [Render](https://render.com).
+- **Create a New Web Service:** Navigate to the Render dashboard and create a new web service.
 
 ### 2. Deploy
 
-1. **Connect Your Repository:**
-   - Connect your GitHub or GitLab repository where both your React application and Express.js server code are stored.
-
-2. **Configure Build and Start Commands:**
+- **Connect Your Repository:** Connect your GitHub or GitLab repository where both your React application and Express.js server code are stored.
+- **Configure Build and Start Commands:**
    - **Build Command:** `npm run build`
    - **Start Command:** `npm run start`
 
    Ensure that your `package.json` scripts are properly configured to handle both the client and server build and start processes.
 
-3. **Environment Variables:**
+- **Environment Variables:**
    - Add any required environment variables in the Render dashboard under the "Environment" settings. This includes API keys, database connection details, and other configuration settings.
 
-4. **Deploy:**
+- **Deploy:**
    - Click the "Deploy" button to start the deployment process. Render will build and deploy your application.
 
 ### 3. Configure Database
 
-1. **Set Up Database:**
+- **Set Up Database:**
    - If using Render's managed PostgreSQL service, set up a new PostgreSQL instance from the Render dashboard.
 
-2. **Update Environment Variables:**
+- **Update Environment Variables:**
    - Ensure that the database connection details (e.g., `USER`, `HOST`, `DATABASE`, `PASSWORD`) are correctly set in your environment variables.
 
 ### 4. Monitor and Maintain
 
-1. **Monitor Logs:**
+- **Monitor Logs:**
    - Use Render's logging features to monitor the application and server logs for any issues.
 
-2. **Automatic Deployments:**
+- **Automatic Deployments:**
    - Configure automatic deployments for continuous integration. Render supports automatic redeployments when you push changes to your repository.
 
-3. **Scaling and Performance:**
+- **Scaling and Performance:**
    - Adjust scaling settings and resources as needed based on your application's performance and traffic requirements.
 
-4. **WebSocket Support:**
+- **WebSocket Support:**
    - If deploying to other services, ensure that they support WebSocket servers if your application uses WebSocket for real-time communication.
 
 
